@@ -18,7 +18,7 @@ $FunctionTemplate = @'
  #>
 function {{Verb}}-Pac{{Group:pascal}}{{Noun}} {
     param(
-        {{params}} 
+{{params}}
     )
 
     Get-PacCommand -Group $Script:Group -Command $Script:Commands.{{CommandName:pascal}} -Params $PSBoundParameters | 
@@ -27,9 +27,12 @@ function {{Verb}}-Pac{{Group:pascal}}{{Noun}} {
 '@
 
 $ParameterTemplate = @'
-[Parameter(Mandatory = $false, HelpMessage = '{{Arg:help}}')]
-{{alias}}
-[string]${{Arg:pascal}}
+        [Parameter(
+            Mandatory = $false, 
+            HelpMessage = '{{Arg:help}}'
+        )]
+        {{alias}}
+        [string]${{Arg:pascal}}
 '@
 
 $FilePath = './pac-1.30.3+g0f0e0b9.yaml'
@@ -67,6 +70,14 @@ $Definitions | ForEach-Object {
                 $Verb = 'Clear'
                 $Noun = ''
             }
+            { $Command.Name -eq 'enable' } {
+                $Verb = 'Enable'
+                $Noun = ''
+            }
+            { $Command.Name -eq 'disable' } {
+                $Verb = 'Disable'
+                $Noun = ''
+            }
             { $Command.Name -eq 'create' } {
                 $Verb = 'New'
                 $Noun = ''
@@ -89,6 +100,10 @@ $Definitions | ForEach-Object {
             }
             { $Command.Name -eq 'name' } {
                 $Verb = 'Rename'
+                $Noun = ''
+            }
+            { $Command.Name -eq 'Run' } {
+                $Verb = 'Invoke'
                 $Noun = ''
             }
             { $Command.Name -eq 'select' } {
@@ -134,8 +149,8 @@ $Definitions | ForEach-Object {
             $Params += $ParameterDeclaration
         }
 
-        $Params += '[switch]$ShowCommand'
-        $Function = $Function -replace '{{params}}', ($Params -join ",`n`n   ")
+        $Params += '        [switch]$ShowCommand'
+        $Function = $Function -replace '{{params}}', ($Params -join ",`n`n")
         $Functions += $Function
     }
 

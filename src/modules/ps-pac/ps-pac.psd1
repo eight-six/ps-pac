@@ -88,9 +88,9 @@ NestedModules = @(
     # 'nested/power-fx.psm1'
     # 'nested/powerpages.psm1'
     # 'nested/solution.psm1'
-    # 'nested/telemetry.psm1'
-    # 'nested/test.psm1'
-    # 'nested/tool.psm1'
+    'nested/telemetry.psm1'
+    'nested/test.psm1'
+    'nested/tool.psm1'
 )
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = '*'

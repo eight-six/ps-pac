@@ -9,6 +9,7 @@ function DoIt {
     if($ShowCommand) {
         $PacCommand.GetDisplayText()
     } else {
+        Write-Verbose -Message "Executing ``$($PacCommand.GetDisplayText())``"
         &  $PacCommand.Exe $PacCommand.Tokens
     }
 }
