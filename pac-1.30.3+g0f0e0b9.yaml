@@ -1,0 +1,1256 @@
+- Name: admin
+  Description: Work with your Power Platform Admin Account
+  Commands: []
+- Name: application
+  Description: Commands for listing and installing available Dataverse applications from AppSource
+  Commands:
+  - Name: list
+    Description: List available Dataverse applications from AppSource
+    Arguments:
+    - Name: --environment
+      Description: 'List available Dataverse applications for given environment (by ID or url); if not specified, list all applications in the tenant (alias: -env)'
+    - Name: --output
+      Description: 'Location of the JSON file to be created with list of the Dataverse applications from AppSource (alias: -o)'
+    - Name: --installState
+      Description: 'Filter by application install state (alias: -s)'
+      AllowedValues:
+      - NotInstalled
+      - Installed
+      - All
+  - Name: install
+    Description: Installs Dataverse application to given environment.
+    Arguments:
+    - Name: --environment
+      Description: 'List available Dataverse applications for given environment (by ID or url); if not specified, list all applications in the tenant (alias: -env)'
+    - Name: --application-name
+      Description: 'Unique name of the application to install to the target environment. (alias: -an)'
+    - Name: --application-list
+      Description: 'Location of the JSON file with list of the Dataverse applications from AppSource to be installed (alias: -al)'
+- Name: auth
+  Description: Manage how you authenticate to various services
+  Commands:
+  - Name: create
+    Description: Create and store authentication profiles on this computer
+    Arguments:
+    - Name: --name
+      Description: 'The name you want to give to this authentication profile (maximum 30 characters). (alias: -n)'
+    - Name: --username
+      Description: 'Optional: The username to authenticate with; shows Microsoft Entra ID dialog if not specified. (alias: -un)'
+    - Name: --password
+      Description: 'Optional: The password to authenticate with (alias: -p)'
+    - Name: --applicationId
+      Description: 'Optional: The application ID to authenticate with. (alias: -id)'
+    - Name: --clientSecret
+      Description: 'Optional: The client secret to authenticate with (alias: -cs)'
+    - Name: --certificateDiskPath
+      Description: 'Optional: The certificate disk path to authenticate with (alias: -cdp)'
+    - Name: --certificatePassword
+      Description: 'Optional: The certificate password to authenticate with (alias: -cp)'
+    - Name: --tenant
+      Description: 'Tenant ID if using application ID/client secret or application ID/client certificate. (alias: -t)'
+    - Name: --cloud
+      Description: 'Optional: The cloud instance to authenticate with (alias: -ci)'
+      AllowedValues:
+      - Public
+      - UsGov
+      - UsGovHigh
+      - UsGovDod
+      - China
+    - Name: --deviceCode
+      Description: 'Use the Microsoft Entra ID Device Code flow for interactive sign-in. (alias: -dc)'
+    - Name: --managedIdentity
+      Description: 'Use Azure Managed Identity. (alias: -mi)'
+    - Name: --environment
+      Description: 'Default environment (ID, url, unique name, or partial name). (alias: -env)'
+    - Name: --kind
+      Description: "(deprecated) The kind of authentication profile you're creating. (alias: -k)"
+    - Name: --url
+      Description: '(deprecated) The resource URL to connect to (alias: -u)'
+  - Name: list
+    Description: List the authentication profiles stored on this computer
+    Arguments: []
+  - Name: select
+    Description: Select which authentication profile should be active
+    Arguments:
+    - Name: --index
+      Description: 'The index of the profile to be active. (alias: -i)'
+    - Name: --name
+      Description: 'The name of the profile to be active (alias: -n)'
+  - Name: delete
+    Description: Delete a particular authentication profile
+    Arguments:
+    - Name: --index
+      Description: 'The index of the profile to be deleted (alias: -i)'
+    - Name: --name
+      Description: 'The name of the profile to be active (alias: -n)'
+  - Name: update
+    Description: Update name or target environment of an existing authentication profile
+    Arguments:
+    - Name: --index
+      Description: 'The index of the profile to be named/renamed (alias: -i)'
+    - Name: --name
+      Description: 'The name you want to give to this authentication profile (maximum 30 characters). (alias: -n)'
+    - Name: --environment
+      Description: 'Default environment (ID, url, unique name, or partial name). (alias: -env)'
+  - Name: name
+    Description: Name or rename an existing authentication profile
+    Arguments:
+    - Name: --index
+      Description: 'The index of the profile to be named/renamed (alias: -i)'
+    - Name: --name
+      Description: 'The name you want to give to this authentication profile (maximum 30 characters). (alias: -n)'
+  - Name: clear
+    Description: Clear all authentication profiles stored on this computer
+    Arguments: []
+- Name: canvas
+  Description: Operating with Power Apps .msapp files
+  Commands:
+  - Name: download
+    Description: Download canvas app as .msapp file
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --name
+      Description: 'Canvas app exact, partial name, or App ID (alias: -n)'
+    - Name: --file-name
+      Description: "File name (usually with .msapp extension). If not provided file is saved in current directory with 'appname'.msapp (alias: -f)"
+    - Name: --extract-to-directory
+      Description: 'Directory name to extract canvas app to (alias: -d)'
+    - Name: --overwrite
+      Description: 'Allow file overwrite (alias: -o)'
+  - Name: list
+    Description: List canvas apps
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: pack
+    Description: (Preview) Pack sources into an msapp file
+    Arguments:
+    - Name: --sources
+      Description: Directory to sources to be packed
+    - Name: --msapp
+      Description: Path to .msapp file
+  - Name: unpack
+    Description: (Preview) Extract an msapp file into sources
+    Arguments:
+    - Name: --sources
+      Description: Directory to sources to be unpacked
+    - Name: --msapp
+      Description: Path to .msapp file
+  - Name: create
+    Description: Generate a canvas app from a custom connector
+    Arguments:
+    - Name: --msapp
+      Description: Path to .msapp file to be generated
+    - Name: --connector-id
+      Description: The ID of the Connector to generate the Power App from.
+    - Name: --connector-display-name
+      Description: The display name of the Connector to generate the Power App from.
+    - Name: --environment
+      Description: The target Environment ID or URL. The default value is the environment of your currently active Dataverse Auth Profile.
+- Name: catalog
+  Description: Commands for working with Catalog in Power Platform
+  Commands:
+  - Name: list
+    Description: List all published catalog items from the current Dataverse organization.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --catalog-item-name
+      Description: 'Catalog item name to search for. (alias: -n)'
+    - Name: --catalog-item-id
+      Description: 'Catalog item ID to search for. When catalog item ID is used, catalog item name is ignored. (alias: -cid)'
+    - Name: --include-active
+      Description: 'Include active items. (alias: -ia)'
+  - Name: submit
+    Description: Submit catalog approval request.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path to catalog submission document (alias: -p)'
+    - Name: --package-zip
+      Description: 'Path to package zip file. (alias: -pz)'
+    - Name: --solution-zip
+      Description: 'Path to solution zip file. (alias: -sz)'
+    - Name: --poll-status
+      Description: 'Poll to check status of your request (alias: -ps)'
+  - Name: install
+    Description: Install a catalog item to the target environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --catalog-item-id
+      Description: 'Catalog item to be installed on the target environment. (alias: -cid)'
+    - Name: --settings
+      Description: 'Runtime Package Settings for the installation framework to execute. The format of the string must be `key=value|key=value`. (alias: -s)'
+    - Name: --target-version
+      Description: 'Target version to install. If left empty, the published version is selected. (alias: -tv)'
+    - Name: --poll-status
+      Description: 'Poll to check status of your request (alias: -ps)'
+    - Name: --target-url
+      Description: '(deprecated) Url of the target environment for catalog item installation (alias: -tu)'
+  - Name: status
+    Description: Get status of the catalog install/submit request.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --tracking-id
+      Description: 'Request tracking ID. (alias: -id)'
+    - Name: --type
+      Description: 'Request type (alias: -t)'
+      AllowedValues:
+      - Install
+      - Submit
+  - Name: update
+    Description: Update settings for the catalog.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path to catalog settings document (alias: -p)'
+  - Name: create-submission
+    Description: 'Create catalog submission document. Note: This command will be removed in a future release.'
+    Arguments:
+    - Name: --path
+      Description: 'Path to catalog submission document (alias: -p)'
+- Name: connection
+  Description: Commands for working with Dataverse connection.
+  Commands:
+  - Name: create
+    Description: Create new Dataverse connection.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --tenant-id
+      Description: 'Tenant Id (alias: -t)'
+    - Name: --name
+      Description: 'Connection name. (alias: -n)'
+    - Name: --application-id
+      Description: 'Application Id (alias: -a)'
+    - Name: --client-secret
+      Description: 'Client Secret (alias: -cs)'
+  - Name: delete
+    Description: Delete Dataverse connection.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --connection-id
+      Description: 'Connection Id. (alias: -id)'
+  - Name: list
+    Description: List all Connections.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: update
+    Description: Update Dataverse connection.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --tenant-id
+      Description: 'Tenant Id (alias: -t)'
+    - Name: --connection-id
+      Description: 'Connection Id. (alias: -id)'
+    - Name: --application-id
+      Description: 'Application Id (alias: -a)'
+    - Name: --client-secret
+      Description: 'Client Secret (alias: -cs)'
+- Name: connector
+  Description: Commands for working with Power Platform Connectors
+  Commands:
+  - Name: list
+    Description: List the Connectors registered in Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: init
+    Description: Initializes a new API Properties file for a Connector.
+    Arguments:
+    - Name: --connection-template
+      Description: 'Generate an initial Connection Parameters set with the specified template. (alias: -ct)'
+      AllowedValues:
+      - NoAuth
+      - BasicAuth
+      - ApiKey
+      - OAuthGeneric
+      - OAuthAAD
+    - Name: --generate-script-file
+      Description: Generate an initial Connector Script file
+    - Name: --generate-settings-file
+      Description: Generate an initial Connector Settings file
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+  - Name: create
+    Description: Creates a new row in the Connector table in Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --api-definition-file
+      Description: "The filename and path to read the Connector's OpenApiDefinition. (alias: -df)"
+    - Name: --api-properties-file
+      Description: "The filename and path to read the Connector's API Properties file. (alias: -pf)"
+    - Name: --icon-file
+      Description: 'The filename and path to and Icon .png file. (alias: -if)'
+    - Name: --script-file
+      Description: 'The filename and path to a Script .csx file. (alias: -sf)'
+    - Name: --solution-unique-name
+      Description: 'The unique name of the solution to add the connector to (alias: -sol)'
+    - Name: --settings-file
+      Description: The filename and path Connector Settings file.
+  - Name: download
+    Description: Download a Connector's OpenApiDefinition and API Properties file
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --connector-id
+      Description: 'The ID of the Connector (alias: -id)'
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+  - Name: update
+    Description: Updates a Connector Entity in Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --connector-id
+      Description: 'The ID of the Connector (alias: -id)'
+    - Name: --api-definition-file
+      Description: "The filename and path to read the Connector's OpenApiDefinition. (alias: -df)"
+    - Name: --api-properties-file
+      Description: "The filename and path to read the Connector's API Properties file. (alias: -pf)"
+    - Name: --icon-file
+      Description: 'The filename and path to and Icon .png file. (alias: -if)'
+    - Name: --script-file
+      Description: 'The filename and path to a Script .csx file. (alias: -sf)'
+    - Name: --solution-unique-name
+      Description: 'The unique name of the solution to add the connector to (alias: -sol)'
+    - Name: --settings-file
+      Description: The filename and path Connector Settings file.
+- Name: copilot
+  Description: Tools and utilities for copilot management
+  Commands:
+  - Name: list
+    Description: List of Virtual Agents in the current or target Dataverse environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: status
+    Description: Poll the deployment status of a specified Virtual Agent in the current or target Dataverse environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --bot-id
+      Description: 'The ID of a Virtual Agent (Chatbot). (alias: -id)'
+  - Name: extract-translation
+    Description: Extracts file containing localized content for one or more bots.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --sourcedir
+      Description: 'Source solution directory. When specified, will ignore the connected environment when looking for bots and instead look for content in the solution folder. (alias: -src)'
+    - Name: --bot
+      Description: 'The Chatbot ID or schema name (unique name found in Bot Details or file name in solution explorer). (alias: -id)'
+    - Name: --outdir
+      Description: The output directory to write to.
+    - Name: --format
+      Description: The file format in which to write localized files, either 'resx' or 'json'. The default is 'resx'.
+    - Name: --all
+      Description: 'Write localization files for all supported languages. By default, only the primary language is written. (alias: -a)'
+    - Name: --overwrite
+      Description: 'Allow overwrite of the output data file if it already exists. (alias: -o)'
+  - Name: merge-translation
+    Description: Merge files containing localized content for one or more bots.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --sourcedir
+      Description: 'Source solution directory. When specified, will ignore the connected environment when looking for bots and instead look for content in the solution folder. (alias: -src)'
+    - Name: --file
+      Description: 'The list of files that contain translations. Glob patterns are supported. (alias: -f)'
+    - Name: --whatif
+      Description: Does not execute the command, but outputs the details of what would happen.
+    - Name: --verbose
+      Description: Output more diagnostic information during data import/export
+    - Name: --solution
+      Description: 'Name of the solution. (alias: -s)'
+  - Name: extract-template
+    Description: Extracts a template file from an existing bot in an environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --bot
+      Description: 'The Chatbot ID or schema name (unique name found in Bot Details or file name in solution explorer). (alias: -id)'
+    - Name: --templateFileName
+      Description: Location of the yaml file to write the bot template to.
+    - Name: --overwrite
+      Description: 'Allow overwrite of the output data file if it already exists. (alias: -o)'
+  - Name: create
+    Description: Creates a new bot using an existing template file as the reference.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --schemaName
+      Description: The schema name (unique name) of the new bot.
+    - Name: --templateFileName
+      Description: Source yaml file containing the bot template that was extracted using the extract-template command.
+    - Name: --displayName
+      Description: The display name of the new bot
+    - Name: --solution
+      Description: 'Name of the solution. (alias: -s)'
+  - Name: model
+    Description: Tools and utilities for model management
+    Arguments:
+    - Name: list
+      Description: AI Builder models in the current environment.
+    - Name: predict
+      Description: Sends text or prompt to AI Model
+    - Name: prepare-fetch
+      Description: Takes the FetchXML file from the AI Large Language Model (LLM) and prepares it for execution against the current environment.
+- Name: data
+  Description: Import and export data from Dataverse.
+  Commands:
+  - Name: export
+    Description: Export data
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --schemaFile
+      Description: 'Schema file name. It can be created using the Configuration Migration Tool. (alias: -sf)'
+    - Name: --dataFile
+      Description: 'File name for data zip file. Default data.zip (alias: -df)'
+    - Name: --overwrite
+      Description: 'Allow overwrite of the output data file if it already exists. (alias: -o)'
+    - Name: --verbose
+      Description: 'Output more diagnostic information during data import/export (alias: -v)'
+  - Name: import
+    Description: Import data
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --data
+      Description: 'Zip file or directory name with data for import. (alias: -d)'
+    - Name: --connection-count
+      Description: 'Number of parallel connections to use during import. Default: 5 (alias: -c)'
+    - Name: --verbose
+      Description: 'Output more diagnostic information during data import/export (alias: -v)'
+    - Name: --dataDirectory
+      Description: '(deprecated) Directory name with data for import. (alias: -dd)'
+- Name: help
+  Description: Show help for the Microsoft Power Platform CLI.
+  Commands: []
+- Name: modelbuilder
+  Description: Code Generator for Dataverse APIs and Tables
+  Commands:
+  - Name: build
+    Description: Builds a code model for Dataverse APIs and Tables
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --suppressGeneratedCodeAttri
+      Description: 'buteWhen set, this suppress all generated objects being tagged with the code generation engine and version (alias: -sgca)'
+    - Name: --language
+      Description: "The language to use for the generated proxy code. This value can be either 'CS' or 'VB'. The default language is 'CS'. (alias: -l)"
+    - Name: --namespace
+      Description: 'The namespace for the generated code. The default namespace is the global namespace. (alias: -n)'
+    - Name: --serviceContextName
+      Description: "The name for the generated service context. If a value is passed in, it's used for the Service Context. If not, no Service Context is generated. (alias: -sctx)"
+    - Name: --generatesdkmessages
+      Description: 'When set, emits Sdk message classes as part of code generation. (alias: -a)'
+    - Name: --emitentityetc
+      Description: 'When set, includes the entity ETC ( entity type code ) in the generated code. (alias: -etc)'
+    - Name: --emitvirtualattributes
+      Description: 'When set, includes the Virtual Attributes of entities in the generated code. (alias: -eva)'
+    - Name: --emitfieldsclasses
+      Description: 'Generate a constants structure that contains all of the field names by entity at the time of code generation. (alias: -efc)'
+    - Name: --entitynamesfilter
+      Description: 'Filters the list of entities are retrieved when reading data from Dataverse. Passed in as a semicolon separated list. Using the form <entitylogicalname>;<entitylogicalname> (alias: -enf)'
+    - Name: --messagenamesfilter
+      Description: 'Filters the list of messages that are retrieved when reading data from Dataverse. Passed in as a semicolon separated list, required messages (Create, Update, Delete, Retrieve, RetrieveMultiple, Associate and Disassociate) are always included. Use a trailing or leading asterisk (*) with the names of the messages to allow for all messages starting with or ending with a string. Using the form <messagename>;<messagename>. (alias: -mnf)'
+    - Name: --outdirectory
+      Description: 'Write directory for entity, message, and optionset files. (alias: -o)'
+    - Name: --entitytypesfolder
+      Description: "Folder name that contains entities. The default name is 'Entities'. (alias: -etf)"
+    - Name: --messagestypesfolder
+      Description: "Folder name that contains messages. The default name is 'Messages'. (alias: -mtf)"
+    - Name: --optionsetstypesfolder
+      Description: "Folder name that contains option sets. The default name is 'OptionSets'. (alias: -otf)"
+    - Name: --generateGlobalOptionSets
+      Description: 'Emit all Global OptionSets. Note: If an entity contains a reference to a global optionset, it is emitted even if this switch is not present. (alias: -go)'
+    - Name: --writesettingsTemplateFile
+      Description: 'When set, writes a settings file out to the output directory with the current passed settings or default settings. (alias: -wstf)'
+    - Name: --settingsTemplateFile
+      Description: "Contains Settings to be used for this run of the Dataverse Model Builder, overrides any duplicate parameters on command line. Can't be set when --writesettingstemplate is used. (alias: -stf)"
+    - Name: --suppressINotifyPattern
+      Description: When enabled, doesn't write the INotify wrappers for properties and classes.
+    - Name: --logLevel
+      Description: "Log level. The default value is 'Off'. (alias: -ll)"
+      AllowedValues:
+      - "Off"
+      - Critical
+      - Error
+      - Warning
+      - Information
+      - Verbose
+      - ActivityTracing
+      - All
+- Name: org
+  Description: Work with your Dataverse organization.
+  Commands:
+  - Name: who
+    Description: Displays information about the current Dataverse organization.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: list
+    Description: Lists all of the Dataverse organizations the user has access to
+    Arguments:
+    - Name: --filter
+      Description: 'Show only environments containing filter criteria. (alias: -f)'
+  - Name: fetch
+    Description: Performs FetchXML query against Dataverse
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --xml
+      Description: 'FetchXML query to run (alias: -x)'
+    - Name: --xmlFile
+      Description: 'File with FetchXML query to run (alias: -xf)'
+  - Name: list-settings
+    Description: List environment settings
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --filter
+      Description: 'Show only settings containing filter criteria (alias: -f)'
+  - Name: update-settings
+    Description: Update environment settings
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --name
+      Description: 'Name of the setting to update (alias: -n)'
+    - Name: --value
+      Description: 'Value to which setting should be updated to (alias: -v)'
+  - Name: select
+    Description: Select default organization for current authentication profile.
+    Arguments:
+    - Name: --environment
+      Description: 'Default environment (ID, url, unique name, or partial name). (alias: -env)'
+- Name: package
+  Description: Commands for working with Dataverse package projects
+  Commands:
+  - Name: init
+    Description: Initializes a directory with a new Dataverse package project
+    Arguments:
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+    - Name: --package-name
+      Description: Sets the default name of the package. Applies to the generation of ImportExtension.GetNameOfImport.
+  - Name: add-external-package
+    Description: Adds a package that is external to the Dataverse solution system to a Package Deployer Package project.
+    Arguments:
+    - Name: --path
+      Description: 'Path to the external package (alias: -p)'
+    - Name: --package-type
+      Description: "The type of the package being added. For example: 'xpp' for FnO packages. (alias: -t)"
+    - Name: --import-order
+      Description: A whole number that indicates the order to insert this item into the final ImportConfig.xml file at build time. Negative numbers are inserted before existing elements. Positive numbers are added after existing elements.
+    - Name: --skip-validation
+      Description: "Adds the item to the project file even if the file doesn't exist or appears to be invalid. Note: Using this doesn't affect any validation performed by MSBuild. (alias: -sv)"
+  - Name: add-solution
+    Description: Adds a prebuilt Dataverse solution file to a Package Deployer Package project.
+    Arguments:
+    - Name: --path
+      Description: 'Path to the Dataverse solution file. The file must be a compressed ZIP file. (alias: -p)'
+    - Name: --import-order
+      Description: A whole number that indicates the order to insert this item into the final ImportConfig.xml file at build time. Negative numbers are inserted before existing elements. Positive numbers are added after existing elements.
+    - Name: --skip-validation
+      Description: "Adds the item to the project file even if the file doesn't exist or appears to be invalid. Note: Using this doesn't affect any validation performed by MSBuild. (alias: -sv)"
+    - Name: --publish-workflows-activate
+      Description: -pluginsExplicitly indicates whether to publish the workflows and activate plug-ins when this solution is imported.
+      AllowedValues:
+      - "true"
+      - "false"
+    - Name: --overwrite-unmanaged-custom
+      Description: izationsExplicitly indicates whether to overwrite unmanaged customizations when this solution is imported.
+      AllowedValues:
+      - "true"
+      - "false"
+    - Name: --import-mode
+      Description: Explicitly specifies the required mode when importing this solution.
+      AllowedValues:
+      - sync
+      - async
+    - Name: --missing-dependency-behavio
+      Description: rSpecifies the behavior on import when a dependency of this solution is missing from the target environment.
+      AllowedValues:
+      - skip
+      - fault
+    - Name: --dependency-overrides
+      Description: "A semicolon delimited list of overrides. This value overrides any dependency information encoded in the solution's metadata. Each override should be in the format: `<uniquename>:<minVersion>:<maxVersion>`. Where minVersion and maxVersion are optional but should be in .NET version format syntax."
+  - Name: add-reference
+    Description: Adds reference to Dataverse solution project
+    Arguments:
+    - Name: --path
+      Description: 'The path to the referenced Dataverse solution project (alias: -p)'
+    - Name: --import-order
+      Description: A whole number that indicates the order to insert this item into the final ImportConfig.xml file at build time. Negative numbers are inserted before existing elements. Positive numbers are added after existing elements.
+    - Name: --publish-workflows-activate
+      Description: -pluginsExplicitly indicates whether to publish the workflows and activate plug-ins when this solution is imported.
+      AllowedValues:
+      - "true"
+      - "false"
+    - Name: --overwrite-unmanaged-custom
+      Description: izationsExplicitly indicates whether to overwrite unmanaged customizations when this solution is imported.
+      AllowedValues:
+      - "true"
+      - "false"
+    - Name: --import-mode
+      Description: Explicitly specifies the required mode when importing this solution.
+      AllowedValues:
+      - sync
+      - async
+    - Name: --missing-dependency-behavio
+      Description: rSpecifies the behavior on import when a dependency of this solution is missing from the target environment.
+      AllowedValues:
+      - skip
+      - fault
+    - Name: --dependency-overrides
+      Description: "A semicolon delimited list of overrides. This value overrides any dependency information encoded in the solution's metadata. Each override should be in the format: `<uniquename>:<minVersion>:<maxVersion>`. Where minVersion and maxVersion are optional but should be in .NET version format syntax."
+  - Name: deploy
+    Description: Deploys package to Dataverse
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --logFile
+      Description: 'Log file path (alias: -lf)'
+    - Name: --logConsole
+      Description: 'Output log to console (alias: -c)'
+    - Name: --package
+      Description: 'Path to a package dll or zip file with a package. (alias: -p)'
+    - Name: --solution
+      Description: 'Path to the Dataverse solution file. The file must be a compressed ZIP or CAB file. (alias: -sz)'
+    - Name: --settings
+      Description: 'Runtime Package Settings that are passed to the package that is being deployed. The format of the string must be `key=value|key=value`. (alias: -s)'
+    - Name: --verbose
+      Description: 'Emit verbose logs to the log outputs. (alias: -vdbg)'
+  - Name: show
+    Description: Shows details of Dataverse package
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --package
+      Description: 'Path to a package dll or zip file with a package. (alias: -p)'
+    - Name: --logFile
+      Description: 'Log file path (alias: -lf)'
+    - Name: --verbose
+      Description: 'Emit verbose logs to the log outputs. (alias: -vdbg)'
+- Name: pcf
+  Description: Commands for working with Power Apps component framework projects
+  Commands:
+  - Name: init
+    Description: Initializes a directory with a new Power Apps component framework project
+    Arguments:
+    - Name: --namespace
+      Description: 'The namespace for the component. (alias: -ns)'
+    - Name: --name
+      Description: 'The name for the component. (alias: -n)'
+    - Name: --template
+      Description: 'Choose a template for the component. (alias: -t)'
+      AllowedValues:
+      - field
+      - dataset
+    - Name: --framework
+      Description: "The rendering framework for control. The default value is 'none', which means HTML. (alias: -fw)"
+      AllowedValues:
+      - none
+      - react
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+    - Name: --run-npm-install
+      Description: "Auto run 'npm install' after the control is created. The default value is 'false'. (alias: -npm)"
+  - Name: push
+    Description: Import the Power Apps component framework project into the current Dataverse organization
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --publisher-prefix
+      Description: 'Customization prefix value for the Dataverse solution publisher (alias: -pp)'
+    - Name: --solution-unique-name
+      Description: The unique name of the solution to add the component to.
+    - Name: --verbosity
+      Description: 'Verbosity level for MSBuild when building the temporary solution wrapper. (alias: -v)'
+      AllowedValues:
+      - minimal
+      - normal
+      - detailed
+      - diagnostic
+    - Name: --interactive
+      Description: "Indicates that actions in the build are allowed to interact with the user. Don't use this argument in an automated scenario where interactivity is not expected. (alias: -i)"
+    - Name: --incremental
+      Description: 'Pushes only files which are different using entity updates. (alias: -inc)'
+    - Name: --force-import
+      Description: '(deprecated) Force a full update of the control as part of a temporary solution (alias: -f)'
+  - Name: version
+    Description: Patch version for controls
+    Arguments:
+    - Name: --strategy
+      Description: "Updates patch version for 'ControlManifest.xml' files using specified strategy. If using gittags, set a personal access token in the following environment variable \"PacCli.PAT\" (alias: -s)"
+      AllowedValues:
+      - None
+      - GitTags
+      - FileTracking
+      - Manifest
+    - Name: --patchversion
+      Description: 'Patch version for controls (alias: -pv)'
+    - Name: --path
+      Description: "Absolute/Relative path of the 'ControlManifest.xml' for updating. (alias: -p)"
+    - Name: --allmanifests
+      Description: "Updates patch version for all 'ControlManifest.xml' files (alias: -a)"
+    - Name: --updatetarget
+      Description: 'Specify which target manifest needs to be updated. (alias: -ut)'
+      AllowedValues:
+      - build
+      - project
+    - Name: --filename
+      Description: "Tracker CSV file name to be used when using filetracking as a strategy. The default value is 'ControlsStateVersionInfo.csv'. (alias: -fn)"
+- Name: pipeline
+  Description: Work with Pipelines
+  Commands:
+  - Name: list
+    Description: List Pipelines
+    Arguments:
+    - Name: --environment
+      Description: 'Deployment Environment (alias: -env)'
+    - Name: --pipeline
+      Description: 'Pipeline name or ID for which show list of details such as deployment stages (alias: -p)'
+  - Name: deploy
+    Description: Start pipeline deployment.
+    Arguments:
+    - Name: --environment
+      Description: 'Deployment Environment (alias: -env)'
+    - Name: --solutionName
+      Description: 'Solution Name (alias: -sn)'
+    - Name: --stageId
+      Description: 'Deployment Stage ID (alias: -sid)'
+    - Name: --currentVersion
+      Description: 'Current solution version (alias: -cv)'
+    - Name: --newVersion
+      Description: 'New solution version (alias: -nv)'
+    - Name: --wait
+      Description: 'Wait until the deployment finishes. (alias: -w)'
+- Name: plugin
+  Description: Commands for working with Dataverse plug-in class library
+  Commands:
+  - Name: init
+    Description: Initializes a directory with a new Dataverse plug-in class library.
+    Arguments:
+    - Name: --signing-key-file-path
+      Description: 'Relative path to the Dataverse plug-in assembly originator key file for signing. (alias: -sk)'
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+    - Name: --author
+      Description: 'One or more authors of the Dataverse Plug-in Package. (alias: -a)'
+    - Name: --skip-signing
+      Description: "Skip plug-in assembly signing that gives the plug-in assembly a strong name. The default value is 'false'. (alias: -ss)"
+  - Name: push
+    Description: Import plug-in into Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --pluginId
+      Description: 'ID of plug-in assembly or plug-in package (alias: -id)'
+    - Name: --pluginFile
+      Description: 'File name of plug-in assembly or plug-in package (alias: -pf)'
+    - Name: --type
+      Description: "Type of item if not specified explicitly through --pluginFile. The default value is: 'Nuget'. (alias: -t)"
+      AllowedValues:
+      - Nuget
+      - Assembly
+    - Name: --configuration
+      Description: "Build configuration. The default value is: 'Debug'. (alias: -c)"
+- Name: power-fx
+  Description: (Preview) Commands for working with Power Fx
+  Commands:
+  - Name: repl
+    Description: (Preview) Launch interactive Power Fx Read-Eval-Print Loop
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: run
+    Description: (Preview) Run a file of Power Fx instructions
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --file
+      Description: 'Path of file to execute (alias: -f)'
+    - Name: --echo
+      Description: 'True if input commands should echo back to output (alias: -e)'
+- Name: powerpages
+  Description: Commands for working with Power Pages website.
+  Commands:
+  - Name: list
+    Description: List all Power Pages websites from the current Dataverse environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --verbose
+      Description: 'Enables verbose mode to provide more details. (alias: -v)'
+  - Name: download
+    Description: Download Power Pages website content from the current Dataverse environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path where the Power Pages website content is downloaded (alias: -p)'
+    - Name: --webSiteId
+      Description: 'Power Pages website ID to download (alias: -id)'
+    - Name: --includeEntities
+      Description: 'Download only the entities specified for this argument using comma separated entity logical names. (alias: -ie)'
+    - Name: --excludeEntities
+      Description: 'Comma separated list of entity logical names to exclude downloading (alias: -xe)'
+    - Name: --overwrite
+      Description: 'Power Pages website content to overwrite (alias: -o)'
+    - Name: --modelVersion
+      Description: 'Power Pages website data model version to download. (alias: -mv)'
+  - Name: upload
+    Description: Upload Power Pages website content to current Dataverse environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path from where the Power Pages website content is uploaded. (alias: -p)'
+    - Name: --deploymentProfile
+      Description: "Deployment profile name to be used. Defaults to 'default' (alias: -dp)"
+    - Name: --forceUploadAll
+      Description: 'Upload all Power Pages website content to the current Dataverse environment. (alias: -f)'
+    - Name: --modelVersion
+      Description: 'Power Pages website data model version to upload. (alias: -mv)'
+  - Name: bootstrap-migrate
+    Description: Migrates HTML code from bootstrap V3 to V5.
+    Arguments:
+    - Name: --path
+      Description: 'Path of website content. (alias: -p)'
+- Name: solution
+  Description: Commands for working with Dataverse solution projects
+  Commands:
+  - Name: init
+    Description: Initializes a directory with a new Dataverse solution project
+    Arguments:
+    - Name: --publisher-name
+      Description: 'Name of the Dataverse solution publisher (alias: -pn)'
+    - Name: --publisher-prefix
+      Description: 'Customization prefix value for the Dataverse solution publisher (alias: -pp)'
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+  - Name: add-reference
+    Description: Adds a reference from the project in the current directory to the project at 'path'
+    Arguments:
+    - Name: --path
+      Description: 'The path to the referenced project (alias: -p)'
+  - Name: list
+    Description: List all Solutions from the current Dataverse organization
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: delete
+    Description: Delete a solution from Dataverse in the current environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --solution-name
+      Description: 'Name of the solution. (alias: -sn)'
+  - Name: online-version
+    Description: Sets version for solution loaded in Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --solution-name
+      Description: 'Name of the solution. (alias: -sn)'
+    - Name: --solution-version
+      Description: 'Specify the solution version number. (alias: -sv)'
+  - Name: version
+    Description: Update build or revision version for the solution.
+    Arguments:
+    - Name: --strategy
+      Description: "Updates build version for 'Solution.xml' file using specified strategy. If using gittags, set personal access token in the following environment variable \"PacCli.PAT\" (alias: -s)"
+      AllowedValues:
+      - None
+      - GitTags
+      - FileTracking
+      - Solution
+    - Name: --buildversion
+      Description: 'Build version for the solution. (alias: -bv)'
+    - Name: --revisionversion
+      Description: 'Revision version for the solution. (alias: -rv)'
+    - Name: --filename
+      Description: "Tracker CSV file name to be used when using filetracking as a strategy. The default value is 'ControlsStateVersionInfo.csv'. (alias: -fn)"
+    - Name: --solutionPath
+      Description: 'Path to Dataverse solution directory or Solution.xml file. (alias: -sp)'
+    - Name: --patchversion
+      Description: '(deprecated) Patch version for the solution. (alias: -pv)'
+  - Name: import
+    Description: Import the solution into Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path to solution zip file. If not specified, assumes the current folder is a cdsproj project. (alias: -p)'
+    - Name: --activate-plugins
+      Description: 'Activate plug-ins and workflows on the solution. (alias: -ap)'
+    - Name: --force-overwrite
+      Description: 'Force an overwrite of unmanaged customizations (alias: -f)'
+    - Name: --skip-dependency-check
+      Description: 'Skip dependency check against dependencies flagged as product update (alias: -s)'
+    - Name: --import-as-holding
+      Description: 'Import the solution as a holding solution. (alias: -h)'
+    - Name: --stage-and-upgrade
+      Description: 'Import and upgrade the solution. (alias: -up)'
+    - Name: --publish-changes
+      Description: 'Publish your changes upon a successful import. (alias: -pc)'
+    - Name: --convert-to-managed
+      Description: 'Convert to a managed solution. (alias: -cm)'
+    - Name: --async
+      Description: 'Imports the solution asynchronously. (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+    - Name: --settings-file
+      Description: The .json file with the deployment settings for connection references and environment variables.
+    - Name: --skip-lower-version
+      Description: 'Skip solution import if same or higher version is present in current environment. (alias: -slv)'
+  - Name: export
+    Description: Export a solution from Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --name
+      Description: 'The name of the solution to be exported. (alias: -n)'
+    - Name: --path
+      Description: 'Path where the exported solution zip file is written. (alias: -p)'
+    - Name: --managed
+      Description: 'Whether the solution should be exported as a managed solution. (alias: -m)'
+    - Name: --include
+      Description: 'Which settings should be included in the solution being exported. (alias: -i)'
+      AllowedValues:
+      - autonumbering
+      - calendar
+      - customization
+      - emailtracking
+      - externalapplications
+      - general
+      - isvconfig
+      - marketing
+      - outlooksynchronization
+      - relationshiproles
+      - sales
+    - Name: --async
+      Description: 'Exports the solution asynchronously. (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+    - Name: --overwrite
+      Description: 'The exported solution file can overwrite the solution zip file on the local file system. (alias: -ow)'
+    - Name: --targetversion
+      Description: '(deprecated) The version that the exported solution will support (alias: -v)'
+  - Name: clone
+    Description: Create a solution project based on an existing solution in your organization.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --name
+      Description: 'The name of the solution to be exported. (alias: -n)'
+    - Name: --include
+      Description: 'Which settings should be included in the solution being exported. (alias: -i)'
+      AllowedValues:
+      - autonumbering
+      - calendar
+      - customization
+      - emailtracking
+      - externalapplications
+      - general
+      - isvconfig
+      - marketing
+      - outlooksynchronization
+      - relationshiproles
+      - sales
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+    - Name: --async
+      Description: 'Exports the solution asynchronously. (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+    - Name: --processCanvasApps
+      Description: "(Preview) Pack/unpack any Canvas apps (.msapp) while processing the solution. The default value is 'false'. (alias: -pca)"
+    - Name: --packagetype
+      Description: "Specifies the extraction type for the solution. Can be: 'Unmanaged', 'Managed' or 'Both'. The default value is: 'Both'. (alias: -p)"
+    - Name: --localize
+      Description: 'Extract or merge all string resources into .resx files. (alias: -loc)'
+    - Name: --targetversion
+      Description: '(deprecated) The version that the exported solution will support (alias: -v)'
+  - Name: publish
+    Description: Publishes all customizations
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --async
+      Description: 'Publishes all customizations asynchronously (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+  - Name: upgrade
+    Description: Apply solution upgrade
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --solution-name
+      Description: 'Name of the solution. (alias: -sn)'
+    - Name: --async
+      Description: 'Upgrades solution asynchronously (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+  - Name: add-license
+    Description: Add license and plan info to the solution.
+    Arguments:
+    - Name: --planDefinitionFile
+      Description: 'License plan definition file in CSV format; expected columns: Service ID, Display name, More info URL. (alias: -pd)'
+    - Name: --planMappingFile
+      Description: 'License plan mapping file in CSV format; expected columns: Service ID, Component name (alias: -pm)'
+  - Name: check
+    Description: Upload a Dataverse solution project to run against the Power Apps Checker service.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --path
+      Description: 'Path where one or more solution files to be checked exist. The path can contain glob/wildcard characters. (alias: -p)'
+    - Name: --solutionUrl
+      Description: 'SAS Uri pointing to solution.zip to be analyzed (alias: -u)'
+    - Name: --outputDirectory
+      Description: 'Output directory (alias: -o)'
+    - Name: --geo
+      Description: 'Which geographical instance of the Power Apps Checker service to use. (alias: -g)'
+      AllowedValues:
+      - PreviewUnitedStates
+      - UnitedStates
+      - Europe
+      - Asia
+      - Australia
+      - Japan
+      - India
+      - Canada
+      - SouthAmerica
+      - UnitedKingdom
+      - France
+      - SouthAfrica
+      - Germany
+      - UnitedArabEmirates
+      - Switzerland
+      - Norway
+      - Singapore
+      - Korea
+      - USGovernment
+      - USGovernmentL4
+      - USGovernmentL5DoD
+      - China
+    - Name: --customEndpoint
+      Description: 'Specify a custom URL as the Power Apps Checker endpoint. (alias: -ce)'
+    - Name: --ruleLevelOverride
+      Description: 'Path to a file containing a JSON array rules and levels to override. Accepted values for OverrideLevel are: Critical, High, Medium, Low, Informational. Example: [{"Id":"meta-remove-dup-reg","OverrideLevel":"Medium"},{"Id":"il-avoid-specialized-update-ops","OverrideLevel":"Medium"}] (alias: -rl)'
+    - Name: --ruleSet
+      Description: 'Select a rule set that is executed as part of this build. Values: A valid Guid, "AppSource Certification", "Solution Checker" (default). (alias: -rs)'
+    - Name: --excludedFiles
+      Description: 'Exclude Files from the Analysis. Pass as comma-separated values (alias: -ef)'
+    - Name: --saveResults
+      Description: 'Uses current environment to store solution analysis results that can be seen in Solution Health Hub App. By default, this argument is set to false. (alias: -sav)'
+  - Name: create-settings
+    Description: Create a settings file from solution zip or solution folder.
+    Arguments:
+    - Name: --solution-zip
+      Description: 'Path to solution zip file. (alias: -z)'
+    - Name: --solution-folder
+      Description: "Path to the local, unpacked solution folder: either the root of the 'Other/Solution.xml' file or a folder with a .cdsproj file. (alias: -f)"
+    - Name: --settings-file
+      Description: 'The .json file with the deployment settings for connection references and environment variables. (alias: -s)'
+  - Name: pack
+    Description: Package solution components on local filesystem into solution.zip (SolutionPackager).
+    Arguments:
+    - Name: --zipfile
+      Description: 'The full path to the solution ZIP file (alias: -z)'
+    - Name: --folder
+      Description: 'The path to the root folder on the local filesystem. When unpacking or extracting, this is written to. When packing this is read from. (alias: -f)'
+    - Name: --packagetype
+      Description: "When unpacking or extracting, use to specify dual Managed and Unmanaged operation. When packing, use to specify Managed or Unmanaged from a previous unpack 'Both'. Can be: 'Unmanaged', 'Managed' or 'Both'. The default value is 'Unmanaged'. (alias: -p)"
+    - Name: --log
+      Description: 'The path to the log file. (alias: -l)'
+    - Name: --errorlevel
+      Description: "Minimum logging level for log output [Verbose|Info|Warning|Error|Off]. The default value is 'Info'. (alias: -e)"
+    - Name: --singleComponent
+      Description: "Only perform action on a single component type [WebResource|Plugin|Workflow|None]. The default value is 'None'. (alias: -sc)"
+    - Name: --allowDelete
+      Description: "Dictates if delete operations may occur. The default value is 'false'. (alias: -ad)"
+    - Name: --allowWrite
+      Description: "Dictates if write operations may occur. The default value is 'false'. (alias: -aw)"
+    - Name: --clobber
+      Description: "Enables that files marked read-only can be deleted or overwritten. The default value is 'false'. (alias: -c)"
+    - Name: --map
+      Description: 'The full path to a mapping xml file from which to read component folders to pack. (alias: -m)'
+    - Name: --sourceLoc
+      Description: "Generates a template resource file. Valid only on extract. Possible values are 'auto', or language code of the language you wish to export. You can use Language Code Identifier (LCID), or International Organization for Standardization (ISO) language code formats. When present, this extracts the string resources from the given locale as a neutral .resx. If 'auto' or just the long or short form of the switch is specified, the base locale for the solution is used. (alias: -src)"
+    - Name: --localize
+      Description: 'Extract or merge all string resources into .resx files. (alias: -loc)'
+    - Name: --useLcid
+      Description: 'Use Language Code Identifier (LCID) values (1033) rather than International Organization for Standardization (ISO) codes (en-US) for language files. (alias: -lcid)'
+    - Name: --useUnmanagedFileForMissing
+      Description: 'ManagedUse the same XML source file when packaging for Managed and only Unmanaged XML file is found; applies to AppModuleSiteMap, AppModuleMap, FormXml files. (alias: -same)'
+    - Name: --disablePluginRemap
+      Description: "Disabled plug-in fully qualified type name remapping. The default value is 'false'. (alias: -dpm)"
+    - Name: --processCanvasApps
+      Description: "(Preview) Pack/unpack any Canvas apps (.msapp) while processing the solution. The default value is 'false'. (alias: -pca)"
+  - Name: unpack
+    Description: Extract solution components from solution.zip onto local filesystem (SolutionPackager).
+    Arguments:
+    - Name: --zipfile
+      Description: 'The full path to the solution ZIP file (alias: -z)'
+    - Name: --folder
+      Description: 'The path to the root folder on the local filesystem. When unpacking or extracting, this is written to. When packing this is read from. (alias: -f)'
+    - Name: --packagetype
+      Description: "When unpacking or extracting, use to specify dual Managed and Unmanaged operation. When packing, use to specify Managed or Unmanaged from a previous unpack 'Both'. Can be: 'Unmanaged', 'Managed' or 'Both'. The default value is 'Unmanaged'. (alias: -p)"
+    - Name: --log
+      Description: 'The path to the log file. (alias: -l)'
+    - Name: --errorlevel
+      Description: "Minimum logging level for log output [Verbose|Info|Warning|Error|Off]. The default value is 'Info'. (alias: -e)"
+    - Name: --singleComponent
+      Description: "Only perform action on a single component type [WebResource|Plugin|Workflow|None]. The default value is 'None'. (alias: -sc)"
+    - Name: --allowDelete
+      Description: "Dictates if delete operations may occur. The default value is 'false'. (alias: -ad)"
+    - Name: --allowWrite
+      Description: "Dictates if write operations may occur. The default value is 'false'. (alias: -aw)"
+    - Name: --clobber
+      Description: "Enables that files marked read-only can be deleted or overwritten. The default value is 'false'. (alias: -c)"
+    - Name: --map
+      Description: 'The full path to a mapping xml file from which to read component folders to pack. (alias: -m)'
+    - Name: --sourceLoc
+      Description: "Generates a template resource file. Valid only on extract. Possible values are 'auto', or language code of the language you wish to export. You can use Language Code Identifier (LCID), or International Organization for Standardization (ISO) language code formats. When present, this extracts the string resources from the given locale as a neutral .resx. If 'auto' or just the long or short form of the switch is specified, the base locale for the solution is used. (alias: -src)"
+    - Name: --localize
+      Description: 'Extract or merge all string resources into .resx files. (alias: -loc)'
+    - Name: --useLcid
+      Description: 'Use Language Code Identifier (LCID) values (1033) rather than International Organization for Standardization (ISO) codes (en-US) for language files. (alias: -lcid)'
+    - Name: --useUnmanagedFileForMissing
+      Description: 'ManagedUse the same XML source file when packaging for Managed and only Unmanaged XML file is found; applies to AppModuleSiteMap, AppModuleMap, FormXml files. (alias: -same)'
+    - Name: --disablePluginRemap
+      Description: "Disabled plug-in fully qualified type name remapping. The default value is 'false'. (alias: -dpm)"
+    - Name: --processCanvasApps
+      Description: "(Preview) Pack/unpack any Canvas apps (.msapp) while processing the solution. The default value is 'false'. (alias: -pca)"
+  - Name: add-solution-component
+    Description: Add one or more solution components to the target unmanaged solution in Dataverse.
+    Arguments:
+    - Name: --environment
+      Description: 'Environment URL or ID of the target environment. (alias: -env)'
+    - Name: --solutionUniqueName
+      Description: 'Name of the solution. (alias: -sn)'
+    - Name: --component
+      Description: 'The schema name or ID of the component to add to the target solution. (alias: -c)'
+    - Name: --componentType
+      Description: "The value that represents the solution component that you're adding. (alias: -ct)"
+    - Name: --AddRequiredComponents
+      Description: "Indicates whether other solution components required by the solution component that you're adding should also be added to the unmanaged solution. (alias: -arc)"
+  - Name: sync
+    Description: Sync the current Dataverse solution project to the current state of the solution in your organization.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+    - Name: --solution-folder
+      Description: "Path to the local, unpacked solution folder: either the root of the 'Other/Solution.xml' file or a folder with a .cdsproj file. (alias: -f)"
+    - Name: --include
+      Description: 'Which settings should be included in the solution being exported. (alias: -i)'
+      AllowedValues:
+      - autonumbering
+      - calendar
+      - customization
+      - emailtracking
+      - externalapplications
+      - general
+      - isvconfig
+      - marketing
+      - outlooksynchronization
+      - relationshiproles
+      - sales
+    - Name: --async
+      Description: 'Exports the solution asynchronously. (alias: -a)'
+    - Name: --max-async-wait-time
+      Description: 'Max asynchronous wait time in minutes. The default value is 60 minutes. (alias: -wt)'
+    - Name: --processCanvasApps
+      Description: "(Preview) Pack/unpack any Canvas apps (.msapp) while processing the solution. The default value is 'false'. (alias: -pca)"
+    - Name: --packagetype
+      Description: "When unpacking or extracting, use to specify dual Managed and Unmanaged operation. When packing, use to specify Managed or Unmanaged from a previous unpack 'Both'. Can be: 'Unmanaged', 'Managed' or 'Both'. The default value is: 'Both'. (alias: -p)"
+    - Name: --localize
+      Description: 'Extract or merge all string resources into .resx files. (alias: -loc)'
+- Name: telemetry
+  Description: Manage telemetry settings.
+  Commands:
+  - Name: enable
+    Description: Choose to send usage information to help Microsoft improve this product
+    Arguments: []
+  - Name: disable
+    Description: Choose to not send usage information to help Microsoft improve this product
+    Arguments: []
+  - Name: status
+    Description: Show the current status of telemetry.
+    Arguments: []
+- Name: test
+  Description: (Preview) Execution of automated tests for a Power App
+  Commands:
+  - Name: run
+    Description: (Preview) Execute tests defined in a Test Plan file
+    Arguments:
+    - Name: --test-plan-file
+      Description: 'Path to the Test Plan file (alias: -test)'
+    - Name: --environment-id
+      Description: 'Environment ID for the app to be tested. (alias: -env)'
+    - Name: --tenant
+      Description: 'Tenant ID for the app being tested (alias: -t)'
+    - Name: --output-directory
+      Description: 'Path to save test output and logs (alias: -o)'
+    - Name: --domain
+      Description: 'The player domain for the app being tested (alias: -d)'
+      AllowedValues:
+      - Public
+      - Preview
+      - UsGov
+      - UsGovHigh
+      - UsGovDoD
+      - Mooncake
+- Name: tool
+  Description: Power Platform tools that can be installed and launched.
+  Commands:
+  - Name: list
+    Description: List the launchable tools and their local install state and version.
+    Arguments: []
+  - Name: admin
+    Description: Launch Power Platform Admin Center for the current environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: maker
+    Description: Launch Power Apps Maker Portal for the current environment.
+    Arguments:
+    - Name: --environment
+      Description: 'Specifies the target Dataverse. The value may be a Guid or absolute https URL. When not specified, the active organization selected for the current auth profile will be used. (alias: -env)'
+  - Name: prt
+    Description: Launch Plug-in Registration Tool (PRT).
+    Arguments:
+    - Name: --update
+      Description: 'Update tool to latest available version from nuget.org. (alias: -u)'
+    - Name: --clear
+      Description: 'Clear tool from local file cache (alias: -c)'
+  - Name: cmt
+    Description: Launch Configuration Migration Tool (CMT).
+    Arguments:
+    - Name: --update
+      Description: 'Update tool to latest available version from nuget.org. (alias: -u)'
+    - Name: --clear
+      Description: 'Clear tool from local file cache (alias: -c)'
+  - Name: pd
+    Description: Launch Package Deployer (PD).
+    Arguments:
+    - Name: --update
+      Description: 'Update tool to latest available version from nuget.org. (alias: -u)'
+    - Name: --clear
+      Description: 'Clear tool from local file cache (alias: -c)'
+
